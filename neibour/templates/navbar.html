@@ -1,9 +1,5 @@
-
-
-
-
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
       aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,15 +7,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home
+          <a class="nav-link" href="{% url 'home' %}">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="{% url 'new_hood' %}">new hood</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="{%url 'hood'%}">Hoods</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
@@ -32,6 +28,50 @@
           </div>
         </li>
       </ul>
+
+
+
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav ml-auto nav-flex-icons"> 
+        <li class="nav-item">
+          <img class="rounded-circle nav-img" src="" alt="" style="height: 40px">
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+          </a>
+          <!-- <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333" style="background-color: rgb(62, 167, 216)" class="text-success">
+            <a class="dropdown-item" href="">View Profile</a>
+            <a class="dropdown-item" href="">update Profile</a
+
+            <a class="dropdown-item" href="">Log Out</a>
+          </div> -->
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+            </a>
+            <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+              <a class="dropdown-item" href="{%url 'profile'%}">View profile</a>
+              <a class="dropdown-item" href="{%url 'update_profile'%}">Update profile</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">logout</a>
+            </div>
+        </li>
+        <li class="nav-item active" style="padding-top: 10px"><span class="text-white">{{user.username|title}}</span></li>
+        
+      </ul>
+      {% else %}
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        </li>
+  
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+        </li>
+      </ul>
+        {% endif %}
+  
       <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item">
           <a class="nav-link waves-effect waves-light">
