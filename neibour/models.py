@@ -12,10 +12,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE ,default = '')
     email = models.CharField(max_length=100, default = '')
     location = models.CharField(max_length=100,blank =True)
-    # neighbourhood = models.ForeignKey( on_delete=models.SET_NULL, null=True, related_name='neighbours', blank=True)
+    neighbourhood = models.ForeignKey("Neighbourhood",on_delete=models.CASCADE, default='', null=True, blank=True)
     profile_pic = models.ImageField( upload_to='profile/', blank ='true',default='default.png')
-
-
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -32,3 +30,11 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+
+class Neighbourhood(models.Model):
+    name = models.CharField(max_length=50)
+    location= models.CharField(max_length=60)
+    occupants_count = models.IntegerField(null  = True ,blank = True)
+    admin = models.ForeignKey("Profile",on_delete=models.CASCADE, related_name = 'hood')
+    
+     
