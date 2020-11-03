@@ -18,6 +18,8 @@ urlpatterns = [
     path('post',views.post, name = 'post'),
     path('hoodpost/<id>',views.posthood,name = 'hoodpost'),
     path('singlehood/<id>', views.singlehood, name= 'hoodbiz'),
+    path('joinhood/<id>',views.joinhood, name = 'joinhood'),
 ]
+
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
