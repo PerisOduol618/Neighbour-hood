@@ -11,8 +11,11 @@ urlpatterns = [
     path('profile/', views.profile,name = 'profile'),
     path('update_profile/', user_views.update_profile,name = 'update_profile'),
     path('new_hood/', views.new_hood, name='new_hood'),
-    path('hood/', views.neighbourhood, name = 'hood'),
-    path('edithood/', views.edit_hood, name= 'edithood')
+    path('hood/', views.hood, name = 'hood'),
+    path('edithood/', views.edit_hood, name= 'edithood'),
+    path('singlehood/<neighbourhood_id>', views.singlehood, name= 'singlehood'),
+    path('newbiz/',views.newbiz, name = 'newbiz'),
+    path('post/',views.post,name = 'post')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
