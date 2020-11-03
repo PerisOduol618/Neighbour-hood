@@ -122,6 +122,14 @@ def edit_hood(request):
 
 
 
+
+def joinhood(request,id):
+    hood = get_object_or_404(Neighbourhood,id = id)
+    request.user.profile.hood =hood
+    request.user.profile.save()
+    return redirect('hood')
+
+
 @login_required(login_url='/accounts/login/')
 def singlehood(request, id):
     businesses = Business.hood_biz(id = id)
