@@ -121,18 +121,16 @@ def edit_hood(request):
     return render(request,'edit_hood.html',{'form':form})
 
 
-def singlehood(request, neighbourhood_id):
-    neighbourhood = Neighbourhood.objects.get(id = neighbourhood_id)
-    business = Business.objects.filter(neighbourhood=neighbourhood)
-    post = Post.objects.filter(neighbourhood=neighbourhood)
-
-    return render(request, 'singlehood.html', {"business":business, 'post':post, 'neighbourhood':neighbourhood})
-
-
 
 @login_required(login_url='/accounts/login/')
-def newbiz(request, neighbourhood_id):
-    neighbourhood = Neighbourhood.objects.get(id = neighbourhood_id)
+def singlehood(request, id):
+    businesses = Business.hood_biz(id = id)
+    post = Post.hood_post(id = id)
+    return render(request, 'singlehood.html', {'businesses':businesses, 'post':post})
+    
+
+@login_required(login_url='/accounts/login/')
+def newbiz(request):
     current_user = request.user
     if request.method == 'POST':
         form =  NewBizForm(request.POST, request.FILES)
@@ -142,7 +140,7 @@ def newbiz(request, neighbourhood_id):
            
             business.save()
             
-        return redirect('singlehood', neighbourhood.id)
+        return redirect('hood')
 
     else:
         form =  NewBizForm()
@@ -150,8 +148,16 @@ def newbiz(request, neighbourhood_id):
 
 
 @login_required(login_url='/accounts/login/')
-def post(request, neighbourhood_id):
-    neighbourhood = Neighbourhood.objects.get(id = neighbourhood_id)
+def posthood(request, id):
+    post = Post.hood_post(id = id)
+    return render(request, 'hoodpost.html', {'post':post})
+
+
+
+
+
+@login_required(login_url='/accounts/login/')
+def post(request):
     current_user = request.user
     if request.method == 'POST':
         form =  NewPostForm(request.POST, request.FILES)
@@ -161,7 +167,7 @@ def post(request, neighbourhood_id):
            
             post.save()
             
-        return redirect('singlehood',  neighbourhood.id)
+        return redirect('hood')
 
     else:
         form =  NewPostForm()

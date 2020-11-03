@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <h3>Businessess</h3>
+    <a class="btn btn-info" href="{%url 'newbiz' neighbourhood.id%}">Add Business</a>
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for biz in business %}
+
+            <div class="card col-md-3">
+                <h3>{{user.username}}</h3>
+                <p>Title:{{biz.name}}</p>
+                <P>Email:{{biz.email}}</P>
+                <p>Neigborhood:{{biz.neighbourhood}}</p>
+                <p>Description:{{biz.neighbourhood}}</p>
+            </div>
+            <br><br>
+            {%endfor%}
+        </div>
+    </div>
+    <br>
+    <hr style="height:2px;border-width:0;background-color:red">
+
+
+    <h3>Posts</h3>
+    <a class="btn" href="{%url 'post' neighbourhood.id%}">Add Post</a>
+
+
+    <div class="row">
+        {% for post in post %}
+        <div class="card col-md-4">
+            <h3>{{user.username}}</h3>
+            <p>Title:{{post.title}}</p>
+            <P>POst:{{post.text}}</P>
+            <p>Neigborhood:{{post.neighbourhood}}</p>
+            <p>Date Posted:{{post.date}}</p>
+        </div>
+        <br><br>
+        {%endfor%}
+    </div>
+
+</div>
