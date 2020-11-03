@@ -3,14 +3,13 @@ from django.http  import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm,NewHoodForm,EditHoodForm
-from .models import Profile,Neighbourhood
+from .forms import SignUpForm, UserUpdateForm,ProfileUpdateForm,NewHoodForm,EditHoodForm, NewBizForm,NewPostForm
+from .models import Profile,Neighbourhood,Business,Post
 
 
 # Create your views here.
 def home(request):
     return render(request,'home.html')
-
 
 
 def register(request):
@@ -81,14 +80,10 @@ def update_profile(request):
 
     return render(request, 'update_profile.html', context)
 
-
-
-
 @login_required(login_url='/accounts/login/')
-def neighbourhood(request):
+def hood(request):
     hoods = Neighbourhood.objects.all()
     return render(request,'neighbourhoods.html',{"hoods":hoods})
-
 
 
 
@@ -99,7 +94,7 @@ def new_hood(request):
         form = NewHoodForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.admin = current_user.profile 
+            image.admin = current_user.profile
            
             image.save()
             
@@ -124,3 +119,50 @@ def edit_hood(request):
     else:
         form = EditHoodForm()
     return render(request,'edit_hood.html',{'form':form})
+
+
+def singlehood(request, neighbourhood_id):
+    neighbourhood = Neighbourhood.objects.get(id = neighbourhood_id)
+    business = Business.objects.filter(neighbourhood=neighbourhood)
+    post = Post.objects.filter(neighbourhood=neighbourhood)
+
+    return render(request, 'singlehood.html', {"business":business, 'post':post, 'neighbourhood':neighbourhood})
+
+
+
+@login_required(login_url='/accounts/login/')
+def newbiz(request, neighbourhood_id):
+    neighbourhood = Neighbourhood.objects.get(id = neighbourhood_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form =  NewBizForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+           
+            business.save()
+            
+        return redirect('singlehood', neighbourhood.id)
+
+    else:
+        form =  NewBizForm()
+    return render(request, 'newbiz.html', {"form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def post(request, neighbourhood_id):
+    neighbourhood = Neighbourhood.objects.get(id = neighbourhood_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form =  NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+           
+            post.save()
+            
+        return redirect('singlehood',  neighbourhood.id)
+
+    else:
+        form =  NewPostForm()
+    return render(request, 'post.html', {"form": form})
