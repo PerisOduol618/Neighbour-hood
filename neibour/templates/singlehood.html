@@ -1,29 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>WELCOME TO THE HOOD</h1>
-<div class="container-fluid">
+<h1>Welcome to {{hood.name}}</h1>
+
+
+<div class="container">
     <div class="row">
-        {% for biz in businesses %}
-        <div class="card col-md-4">
-            <h2>username:{{user.username}}</h2>
-
-            <h4>
-                Name:{{biz.name}}
-            </h4>
-            <h4>
-                Description:{{biz.description}}
-            </h4>
-            <!-- <h1>
-    Neighbourhood:{{biz.neighbourhood}}
-</h1> -->
-
-            <h4>EMAIL:{{biz.email}}</h4>
-            <h4>Hood:{{biz.neighbourhood}}</h4>
+        <div class="col-sm-6 m-auto">
+            <img class="" src="{{hood.hood_logo.url}}" alt="Card image cap">
         </div>
-        <br><br>
-        {% endfor %}
+        <div class="col-md-6 sm-12">
+            name: {{hood.name}}
+            <p>location:{{hood.location}}</p>
+            <h4>occupants:{{hood.occupants_count}}</h4>
+
+            <p>description:{{hood.description}}</p>
+            <p>emergency: {{hood.emergency_contact}}</p>
+            <a class='btn btn-danger' href="{%url 'newbiz'%}">New business</a>
+            <a class="btn btn-info" href=" /businesses/{{hood.id}} ">View Businesses </a><br><br>
+
+            <a class='btn btn-danger' href="{%url 'post'%}">New Post</a>
+            <a class='btn btn-info' href="/hoodpost/{{hood.id}}">View Post</a>
+
+
+        </div>
     </div>
 </div>
+<!-- <div class="card col-md-4">
+    <h1>
+        name: {{hood.name}}
+
+    </h1>
+    <p>location:{{hood.location}}</p>
+    <h4>count:{{hood.occupants_count}}</h4>
+   
+    <p>description:{{hood.description}}</p>
+    <p>emergency: {{hood.emergency_contact}}</p>
+    <a class='btn btn-danger' href="{%url 'newbiz'%}">New business</a>
+    <a class="btn btn-info" href=" /businesses/{{hood.id}} ">View Businesses </a><br><br>
+
+    <a class='btn btn-danger' href="{%url 'post'%}">New Post</a>
+    <a class='btn btn-info' href="/hoodpost/{{hood.id}}">View Post</a>
+    
+   
+</div>
+
+ -->
+
 
 {%endblock%}

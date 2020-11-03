@@ -1,27 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-    {% for hood in hoods %}
-    <div class="card col-md-4">
-        <h1>
-            name: {{hood.name}}
+<div class="container-fluid">
+    <div class="row">
+        {% for hood in hoods %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                
+                <h3>name: {{hood.name}} </h3>
+                <p>location:{{hood.location}}</p>
+                <img class="" src="{{hood.hood_logo.url}}" alt="Card image cap" style="height: 250px;">
+                
 
-        </h1>
-        <p>location:{{hood.location}}</p>
-        <h4>count:{{hood.occupants_count}}</h4>
-        <img class="" src="{{hood.hood_logo.url}}" alt="Card image cap">
-        <p>description:{{hood.description}}</p>
-        <p>emergency: {{hood.emergency_contact}}</p>
-        <p>id: {{hood.id}}</p>
-        <a href="{%url 'edithood'%}">edit</a>
-        <!-- <a class="btn btn-info" href="{%url 'singlehood'%}">singlehood</a> -->
-        <a class="btn btn-info" href=" /singlehood/{{hood.id}} ">View Businesses </a>
-        <a class='btn btn-info' href="/hoodpost/{{hood.id}}">View Post</a>
+                {%if request.user.profile.neighbourhood == hood %}
+
+                <a class="btn btn-info btn-small" href="{%url 'singlehood' hood.id%}">View Hood</a>
+                <a class="btn btn-danger" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
+
+                {%elif not request.user.profile.neighbourhood%}
+
+
+                <a class="btn btn-info" href="{%url 'joinhood' hood.id%}">Join Hood</a>
+
+                {%endif%}
+            </div>
+
+        </div>
+        {% endfor %}
+
     </div>
-    <br><br>
-
-    {% endfor %}
 </div>
 
 {% endblock %}
