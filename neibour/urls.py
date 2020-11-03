@@ -13,9 +13,11 @@ urlpatterns = [
     path('new_hood/', views.new_hood, name='new_hood'),
     path('hood/', views.hood, name = 'hood'),
     path('edithood/', views.edit_hood, name= 'edithood'),
-    path('singlehood/<neighbourhood_id>', views.singlehood, name= 'singlehood'),
+    path('singlehood/', views.newbiz, name= 'singlehood'),
     path('newbiz/',views.newbiz, name = 'newbiz'),
-    path('post/',views.post,name = 'post')
+    path('post',views.post, name = 'post'),
+    path('hoodpost/<id>',views.posthood,name = 'hoodpost'),
+    path('singlehood/<id>', views.singlehood, name= 'hoodbiz'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
