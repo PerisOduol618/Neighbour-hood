@@ -1,51 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Welcome to {{hood.name}}</h1>
+<h1 class="text-center" style="font-family: 'Kanit', sans-serif;">Welcome to {{hood.name}}</h1>
 
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 m-auto">
+        <div class=" col-sm-12 col-lg-6 mb-4">
             <img class="" src="{{hood.hood_logo.url}}" alt="Card image cap">
         </div>
-        <div class="col-md-6 sm-12">
-            name: {{hood.name}}
-            <p>location:{{hood.location}}</p>
-            <h4>occupants:{{hood.occupants_count}}</h4>
+        <div class=" col-sm-12 col-lg-6">
+            <p><b>Name:</b> {{hood.name}}</p>  
+            <p><b>Location:</b>{{hood.location}}</p>
+            <p><b>Occupants:</b> {{hood.occupants_count}}</p>
+            <p><b>Description:</b> {{hood.description}}</p>
+            <p><b>Emergency Contact:</b> {{hood.emergency_contact}}</p>
+            <a class='btn grey darken' href="{%url 'newbiz'%}">New business</a>
+            <a class="btn default-color" href=" /businesses/{{hood.id}} ">View Businesses </a><br><br>
 
-            <p>description:{{hood.description}}</p>
-            <p>emergency: {{hood.emergency_contact}}</p>
-            <a class='btn btn-danger' href="{%url 'newbiz'%}">New business</a>
-            <a class="btn btn-info" href=" /businesses/{{hood.id}} ">View Businesses </a><br><br>
-
-            <a class='btn btn-danger' href="{%url 'post'%}">New Post</a>
-            <a class='btn btn-info' href="/hoodpost/{{hood.id}}">View Post</a>
+            <a class='btn grey darken' href="{%url 'post'%}">New Post</a>
+            <a class='btn default-color' href="/hoodpost/{{hood.id}}">View Post</a>
 
 
         </div>
     </div>
 </div>
-<!-- <div class="card col-md-4">
-    <h1>
-        name: {{hood.name}}
-
-    </h1>
-    <p>location:{{hood.location}}</p>
-    <h4>count:{{hood.occupants_count}}</h4>
-   
-    <p>description:{{hood.description}}</p>
-    <p>emergency: {{hood.emergency_contact}}</p>
-    <a class='btn btn-danger' href="{%url 'newbiz'%}">New business</a>
-    <a class="btn btn-info" href=" /businesses/{{hood.id}} ">View Businesses </a><br><br>
-
-    <a class='btn btn-danger' href="{%url 'post'%}">New Post</a>
-    <a class='btn btn-info' href="/hoodpost/{{hood.id}}">View Post</a>
-    
-   
-</div>
-
- -->
 
 
 {%endblock%}

@@ -1,29 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>WELCOME TO THE HOOD</h1>
-<div class="container-fluid">
+<div class="container">
+    <br>
+    <h2 class="text-center" style="font-family: 'Kanit', sans-serif;">Available Businessess</h2>
     <div class="row">
         {% for biz in business %}
-        <div class="card col-md-4">
-            <h2>username:{{user.username}}</h2>
-
-            <h4>
-                Name:{{biz.name}}
-            </h4>
-            <h4>
-                Description:{{biz.description}}
-            </h4>
-            <!-- <h1>
-    Neighbourhood:{{biz.neighbourhood}}
-</h1> -->
-
-            <h4>EMAIL:{{biz.email}}</h4>
-            <h4>Hood:{{biz.neighbourhood}}</h4>
+        <div class=" col-sm-12 col-lg-4 mb-5">
+            <div class="card">
+                <div class="mt-3 ml-3 mr-3">
+                    <p><b>Business Name:</b> {{biz.name}}</p>
+                    <p><b>Description:</b> {{biz.description}}</p>
+                    <p><b>Email:</b> {{biz.email}}</p>
+                    <p><b>Hood:</b> {{biz.neighbourhood}}</p>
+                </div>
+            </div>
         </div>
-        <br><br>
+
         {% endfor %}
     </div>
 </div>
-
 {%endblock%}
