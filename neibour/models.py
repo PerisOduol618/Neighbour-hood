@@ -52,9 +52,6 @@ class Neighbourhood(models.Model):
     def delete_neighborhood(self):
         self.delete()
 
-    # @classmethod
-    # def get_absolute_url(cls, neighbourhood_id):
-    #     return cls.objects.filter(id=neighbourhood_id)
 
 
 class Business(models.Model):
