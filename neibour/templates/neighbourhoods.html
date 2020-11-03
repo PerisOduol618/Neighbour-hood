@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+    {% for hood in hoods %}
+    <div class="card col-md-4">
+        <h1>
+            name: {{hood.name}}
+
+        </h1>
+        <p>location:{{hood.location}}</p>
+        <h4>count:{{hood.occupants_count}}</h4>
+        <img class="" src="{{hood.hood_logo.url}}" alt="Card image cap">
+        <p>description:{{hood.description}}</p>
+        <p>emergency: {{hood.emergency_contact}}</p>
+        <p>id: {{hood.id}}</p>
+        <a href="{%url 'edithood'%}">edit</a>
+        <!-- <a class="btn btn-info" href="{%url 'singlehood'%}">singlehood</a> -->
+        <a class="btn btn-info" href=" /singlehood/{{hood.id}} ">View Businesses </a>
+        <a class='btn btn-info' href="/hoodpost/{{hood.id}}">View Post</a>
+    </div>
+    <br><br>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
